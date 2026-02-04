@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oshxona ERP - Elite Edition</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent: #6366f1;
+            --accent-glow: rgba(99, 102, 241, 0.2);
+            --bg-deep: #020617;
+            --card-bg: rgba(15, 23, 42, 0.6);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --input-bg: rgba(0, 0, 0, 0.4);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-deep);
+            color: #f8fafc;
+            overflow: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Number input strelkalarini o'chirish va raqamlar ko'rinishini to'g'rilash */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .tabular-nums {
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Ambient Background Glows */
+        .bg-glow {
+            position: fixed;
+            width: 50vw;
+            height: 50vh;
+            border-radius: 50%;
+            filter: blur(120px);
+            z-index: -1;
+            opacity: 0.15;
+            pointer-events: none;
+            animation: float 20s infinite alternate;
+        }
+        .glow-1 { top: -10%; left: -10%; background: #4f46e5; }
+        .glow-2 { bottom: -10%; right: -10%; background: #a855f7; animation-delay: -10s; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(100px, 50px) scale(1.2); }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 5px; height: 5px; }
+        ::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.2); }
+        ::-webkit-scrollbar-thumb { 
+            background: linear-gradient(to bottom, var(--accent), #4338ca);
+            border-radius: 10px; 
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        /* Glassmorphism Classes */
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--card-border);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .glass-card:hover {
+            border-color: rgba(99, 102, 241, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6), 0 0 30px -5px var(--accent-glow);
+        }
+
+        /* Standard Select & Input Customizing */
+        select, input, textarea {
+            background: var(--input-bg) !important;
+            border: 1px solid rgba(255, 255, 255, 0.05) !important;
+            backdrop-filter: blur(10px);
+            color: #fff !important;
+            border-radius: 1.5rem !important;
+            padding: 1rem 1.5rem !important;
+            font-weight: 700 !important;
+            letter-spacing: 0.025em !important;
+            outline: none !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        }
+
+        select:focus, input:focus {
+            border-color: var(--accent) !important;
+            box-shadow: 0 0 0 4px var(--accent-glow), 0 0 20px rgba(99, 102, 241, 0.2) !important;
+            background: rgba(15, 23, 42, 0.8) !important;
+        }
+
+        /* Option styling */
+        option {
+            background-color: #0f172a !important;
+            color: #fff !important;
+            padding: 15px !important;
+            font-size: 14px !important;
+            font-weight: 600 !important;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%);
+            box-shadow: 0 10px 20px -10px rgba(79, 70, 229, 0.5);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-weight: 900;
+            letter-spacing: 0.1em;
+        }
+
+        .sidebar-active {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(79, 70, 229, 0.25) 100%);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            color: #fff !important;
+        }
+
+        .reveal {
+            animation: reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes reveal {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.4",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.38.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
